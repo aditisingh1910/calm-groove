@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Journal — Calm Grove</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body class="fairy-bg">
+        <header class="site-header">
+            <div class="nav-wrap">
+                <h1 class="logo">Calm Grove</h1>
+                <nav>
+                    <a href="index.html">Home</a>
+                    <a href="login.html">Logout</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="journal-hero">
+                <h2>Your Magical Journal</h2>
+                <p>Write your thoughts with fairy magic and cute stickers.</p>
+            </section>
+
+            <section id="journal" class="panel soft journal-section">
+                <div id="journal-section">
+                    <div class="journal-customization">
+                        <label>Background Color: <input type="color" id="bg-color" value="#f0f8ff"></label>
+                        <label>Font Family: 
+                            <select id="font-family">
+                                <option value="Nunito">Nunito</option>
+                                <option value="Poppins">Poppins</option>
+                                <option value="serif">Serif</option>
+                                <option value="monospace">Monospace</option>
+                            </select>
+                        </label>
+                        <label>Font Size: <input type="range" id="font-size" min="12" max="24" value="16"></label>
+                        <label>Font Color: <input type="color" id="font-color" value="#333"></label>
+                        <label>Sticker: 
+                            <select id="sticker-select">
+                                <option value="">None</option>
+                                <option value="🧚">Fairy</option>
+                                <option value="🌸">Flower</option>
+                                <option value="🌟">Star</option>
+                                <option value="💖">Heart</option>
+                                <option value="🌈">Rainbow</option>
+                                <option value="🐾">Paw</option>
+                                <option value="🦋">Butterfly</option>
+                                <option value="🍄">Mushroom</option>
+                            </select>
+                        </label>
+                    </div>
+                    <textarea id="journal-entry" placeholder="Write your magical thoughts..." rows="8"></textarea>
+                    <button id="save-entry" class="btn">Save Entry</button>
+                    <ul id="entries-list"></ul>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <p>Made with care • Breathe deeply • © Calm Grove</p>
+        </footer>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="journal.js"></script>
+    </body>
+</html>

@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Calm Grove — Mental Wellness</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
+        <link rel="" href="about.html">
+    </head>
+        
+                
+        <header class="site-header">
+            <div class="nav-wrap">
+                <h1 class="logo">Calm Grove</h1>
+                <nav>
+                    <a href="about.html">About</a>
+                    <a href="#tips">Tips</a>
+                    <a href="#resources">Resources</a>
+                    <a href="journal.html">Journal</a>
+                    <a href="login.html">Login</a>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div class="hero-bg">
+                    <img class="nature-img second" src="andy-makely-575pVnSrbL4-unsplash.jpg" alt="river and trees">
+
+                   
+                </div>
+
+                <div class="hero-content">
+                    <h2>Find Calm in Green Spaces</h2>
+                    <p>Small daily steps for mental wellbeing — breathe, connect, grow.</p>
+                    <a class="btn" href="#tips">Get Tips</a>
+                    <!-- mood tracker moved below hero per request -->
+                </div>
+            </section> 
+
+            <!-- Wellness panel (breathing + ambient audio) placed below the hero -->
+            <div class="bottom-mood pos-below-hero" aria-live="polite">
+                <div class="bottom-mood-card">
+                    <div class="wellness-only">
+                        <h4 class="bottom-mood-title">Wellness Tools</h4>
+                        <div class="wellness-controls ">
+                            <button id="breath-toggle" class="btn light">Start Breathing</button>
+                                <div id="breath-panel" class="breath-panel" hidden>
+                                <div class="breath-visual">
+                                    <div class="breath-circle" aria-hidden="true">
+                                        <!-- kawaii anime face SVG (eyes, mouth, blush) -->
+                                        <svg viewBox="0 0 100 100" width="100" height="100" aria-hidden="true" class="kawaii-face">
+                                            <defs>
+                                                <filter id="softGlow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                                            </defs>
+                                            <circle cx="50" cy="50" r="34" fill="url(#faceGrad)" opacity="0.98"></circle>
+                                            <g class="blushes" opacity="0.9">
+                                                <circle cx="33" cy="62" r="5" fill="#FFD1D8"/>
+                                                <circle cx="67" cy="62" r="5" fill="#FFD1D8"/>
+                                            </g>
+                                            <!-- eyes -->
+                                            <g class="eyes" transform="translate(0,0)">
+                                                <ellipse class="eye left" cx="38" cy="44" rx="5" ry="6" fill="#2b2b2b"/>
+                                                <ellipse class="eye right" cx="62" cy="44" rx="5" ry="6" fill="#2b2b2b"/>
+                                            </g>
+                                            <!-- mouths: three simple paths, we'll toggle opacity via CSS -->
+                                            <g class="mouths">
+                                                <path class="mouth-smile" d="M40 62 Q50 72 60 62" stroke="#2b2b2b" stroke-width="3" fill="none" stroke-linecap="round" opacity="0"/>
+                                                <path class="mouth-neutral" d="M44 64 L56 64" stroke="#2b2b2b" stroke-width="2.5" stroke-linecap="round" opacity="1"/>
+                                                <path class="mouth-sad" d="M40 66 Q50 56 60 66" stroke="#2b2b2b" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0"/>
+                                            </g>
+                                            <!-- small sparkle decorations -->
+                                            <g class="sparkles" opacity="0.0">
+                                                <circle cx="16" cy="24" r="2.2" fill="#fff7b2"/>
+                                                <circle cx="84" cy="30" r="1.6" fill="#cce7ff"/>
+                                                <circle cx="78" cy="14" r="1.8" fill="#ffd2f0"/>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <div class="breath-label" id="breath-label">Ready</div>
+                                </div>
+                                <div class="breath-settings">
+                                    <label>Inhale <input id="inhale" type="number" min="1" value="4">s</label>
+                                    <label>Hold <input id="hold" type="number" min="0" value="4">s</label>
+                                    <label>Exhale <input id="exhale" type="number" min="1" value="6">s</label>
+                                    <label>Cycles <input id="cycles" type="number" min="1" value="4"></label>
+                                </div>
+                                <div class="breath-actions">
+                                    <button id="breath-start" class="btn">Start</button>
+                                    <button id="breath-stop" class="btn light">Stop</button>
+                                </div>
+                            </div>
+
+                            <div class="music-controls">
+                                <div class="music-row">
+                                    <label for="audio-preset">Sound</label>
+                                    <select id="audio-preset">
+                                        <option value="calm-pad">Calm Pad</option>
+                                        <option value="soft-bells">Soft Bells</option>
+                                        <option value="drone">Deep Drone</option>
+                                        <option value="shimmer">Shimmer</option>
+                                    </select>
+                                </div>
+                                <button id="audio-toggle" class="btn light">Play Ambient</button>
+                                <label class="vol">Volume <input id="audio-vol" type="range" min="0" max="1" step="0.01" value="0.15"></label>
+                            </div>
+                            
+                            <!-- Face customization controls -->
+                            <div class="face-controls" aria-label="Customize face">
+                                <h5 class="face-title">Customize Face</h5>
+                                <label class="face-row">Color <input id="face-color" type="color" value="#fff1e6"></label>
+                                <label class="face-row">Eyes
+                                    <select id="face-eyes">
+                                        <option value="auto">Auto</option>
+                                        <option value="normal">Normal</option>
+                                        <option value="big">Big</option>
+                                        <option value="sparkle">Sparkle</option>
+                                    </select>
+                                </label>
+                                <label class="face-row">Mouth
+                                    <select id="face-mouth">
+                                        <option value="auto">Auto</option>
+                                        <option value="smile">Smile</option>
+                                        <option value="neutral">Neutral</option>
+                                        <option value="sad">Sad</option>
+                                    </select>
+                                </label>
+                                <div class="face-actions">
+                                    <button id="face-reset" class="btn light">Reset Face</button>
+                                </div>
+                            </div>
+                            <!-- Face presets thumbnails -->
+                            <div class="face-presets" aria-hidden="false">
+                                <div class="presets-title">Presets</div>
+                                <div class="presets-list">
+                                    <button class="face-preset" data-preset="sunny" aria-label="Sunny preset" title="Sunny">
+                                        <svg viewBox="0 0 40 40" width="40" height="40"><circle cx="20" cy="20" r="14" fill="#fff6e8"/><ellipse cx="14" cy="16" rx="1.8" ry="2.2" fill="#2b2b2b"/><ellipse cx="26" cy="16" rx="1.8" ry="2.2" fill="#2b2b2b"/><path d="M15 24 Q20 28 25 24" stroke="#2b2b2b" stroke-width="1.7" fill="none" stroke-linecap="round"/></svg>
+                                    </button>
+                                    <button class="face-preset" data-preset="sleepy" aria-label="Sleepy preset" title="Sleepy">
+                                        <svg viewBox="0 0 40 40" width="40" height="40"><circle cx="20" cy="20" r="14" fill="#eaf6ff"/><path d="M12 16 Q14 12 16 16" stroke="#2b2b2b" stroke-width="1.6" fill="none"/><path d="M28 16 Q26 12 24 16" stroke="#2b2b2b" stroke-width="1.6" fill="none"/><path d="M16 26 L24 26" stroke="#2b2b2b" stroke-width="1.8" stroke-linecap="round"/></svg>
+                                    </button>
+                                    <button class="face-preset" data-preset="cheery" aria-label="Cheery preset" title="Cheery">
+                                        <svg viewBox="0 0 40 40" width="40" height="40"><circle cx="20" cy="20" r="14" fill="#ffeef0"/><ellipse cx="14" cy="16" rx="2.2" ry="2.8" fill="#2b2b2b"/><ellipse cx="26" cy="16" rx="2.2" ry="2.8" fill="#2b2b2b"/><path d="M13 24 Q20 32 27 24" stroke="#2b2b2b" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+                                    </button>
+                                    <button class="face-preset" data-preset="mischief" aria-label="Mischief preset" title="Mischief">
+                                        <svg viewBox="0 0 40 40" width="40" height="40"><circle cx="20" cy="20" r="14" fill="#f6fff5"/><ellipse cx="14" cy="16" rx="1.8" ry="2.2" fill="#2b2b2b"/><ellipse cx="26" cy="16" rx="1.8" ry="2.2" fill="#2b2b2b"/><path d="M13 26 Q20 20 27 26" stroke="#2b2b2b" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+                                    </button>
+                                    <button class="face-preset" data-preset="calm" aria-label="Calm preset" title="Calm">
+                                        <svg viewBox="0 0 40 40" width="40" height="40"><circle cx="20" cy="20" r="14" fill="#f0fff8"/><ellipse cx="14" cy="16" rx="1.6" ry="2" fill="#2b2b2b"/><ellipse cx="26" cy="16" rx="1.6" ry="2" fill="#2b2b2b"/><path d="M14 25 Q20 28 26 25" stroke="#2b2b2b" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <section id="about" class="panel soft">
+                <h3>About Calm Grove</h3>
+                <p>Calm Grove is a friendly corner on the web with gentle guidance for mental health. Nature-inspired design helps create a soothing environment.</p>
+            </section>
+
+            <section id="tips" class="panel cards">
+                <h3>Daily Tips</h3>
+                <div class="card-grid">
+                    <article class="card">
+                        <h4>Breathe</h4>
+                        <p>Try a simple 4-4-4 exercise: inhale for 4, hold for 4, exhale for 4 — repeat 4 times.</p>
+                    </article>
+                    <article class="card">
+                        <h4>Move</h4>
+                        <p>Walk for 10 minutes outside or do gentle stretches to reset your nervous system.</p>
+                    </article>
+                    <article class="card">
+                        <h4>Connect</h4>
+                        <p>Reach out to a friend, or write one line in a gratitude journal.</p>
+                    </article>
+                    <article class="card">
+                        <h4>Mindful Breathing</h4>
+                        <p>Sit comfortably, close your eyes, and focus on the sensation of breath at the nostrils for 2–5 minutes.</p>
+                    </article>
+                    <article class="card">
+                        <h4>Body Scan</h4>
+                        <p>Slowly move attention from toes to head, noticing tension and gently releasing it as you breathe out.</p>
+                    </article>
+                    <article class="card">
+                        <h4>Grounding Trick</h4>
+                        <p>Use the 5-4-3-2-1 method: name 5 things you see, 4 you can touch, 3 you hear, 2 you smell, 1 you taste.</p>
+                    </article>
+                    <article class="card">
+                        <h4>Progressive Muscle Relaxation</h4>
+                        <p>Tense each muscle group 5 seconds, then release — move from feet up to the face to reduce physical stress.</p>
+                    </article>
+                    <article class="card">
+                        <h4>Guided Imagery</h4>
+                        <p>Visualize a calm place in detail — the sights, sounds and textures — for 3–7 minutes to soothe the mind.</p>
+                    </article>
+                    <article class="card">
+                        <h4>Short Practices</h4>
+                        <p>When time is tight, do 1–2 minutes of mindful breathing or a single body scan prompt to reset quickly.</p>
+                    </article>
+                    <article class="card">
+                        <h4>Consistency Over Length</h4>
+                        <p>Short daily routines (5–10 minutes) beat occasional long sessions; pick a time and make it a micro-habit.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section id="resources" class="panel soft">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Self-care checklist</a></li>
+                    <li><a href="#">Meditation exercises</a></li>
+                    <li><a href="#">Find a therapist</a></li>
+                </ul>
+            </section>
+
+            <section id="journal" class="panel soft">
+                <h3>Personal Journal</h3>
+                <p>Reflect on your day and save your thoughts.</p>
+                <div id="journal-section" hidden>
+                    <div class="journal-customization">
+                        <label>Background Color: <input type="color" id="bg-color" value="#ffffff"></label>
+                        <label>Sticker: 
+                            <select id="sticker-select">
+                                <option value="">None</option>
+                                <option value="🌸">Flower</option>
+                                <option value="🌟">Star</option>
+                                <option value="💖">Heart</option>
+                                <option value="🌈">Rainbow</option>
+                                <option value="🐾">Paw</option>
+                            </select>
+                        </label>
+                    </div>
+                    <textarea id="journal-entry" placeholder="Write your journal entry..." rows="5"></textarea>
+                    <button id="save-entry" class="btn">Save Entry</button>
+                    <ul id="entries-list"></ul>
+                </div>
+            </section>
+        </main>
+
+            <!-- Bottom-center floating mood tracker -->
+            <!-- removed floating bottom widget (restored hero-centered widget instead) -->
+
+                <div class="spring-flowers" aria-hidden="true"></div>
+
+                <footer class="site-footer">
+            <p>Made with care • Breathe deeply • © Calm Grove</p>
+        </footer>
+
+<!-- Affirmation panel markup (insert near end of body) -->
+<aside class="affirmation-panel" aria-label="Daily affirmations" hidden>
+    <button class="affirm-toggle" aria-expanded="false" aria-controls="affirm-box">Affirmations</button>
+    <div id="affirm-box" class="affirm-box">
+        <div class="affirm-header">
+            <h4>Daily Affirmations</h4>
+            <button id="affirm-clear" class="btn light small" title="Clear all">Clear</button>
+        </div>
+        <textarea id="affirm-input" placeholder="Write an affirmation..." rows="3"></textarea>
+        <div class="affirm-actions">
+            <button id="affirm-add" class="btn">Save</button>
+        </div>
+        <ul id="affirm-list" class="affirm-list" aria-live="polite"></ul>
+    </div>
+</aside>
+<!-- Load jQuery from CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+        <script src="script.js"></script>
+        <script src=""></script>
+    </body>
+</html>
